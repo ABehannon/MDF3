@@ -33,8 +33,7 @@
         android:layout_above="@+id/sendButton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/textMessage"
-        android:src="@drawable/ic_launcher" />
+        android:layout_below="@+id/textMessage" />
 
     <TextView
         android:id="@+id/InstructionText1"
