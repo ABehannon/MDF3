@@ -49,11 +49,11 @@
         android:id="@+id/InfoText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/latitude"
+        android:layout_above="@+id/accelerometer"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:gravity="center_vertical|center_horizontal"
-        android:text="Coordinates (GPS must be enabled!)" />
+        android:text="Accelerometer Info" />
 
     <ImageView
         android:id="@+id/cameraImage"
@@ -73,23 +73,13 @@
         android:gravity="center_vertical|center_horizontal" />
 
     <TextView
-        android:id="@+id/latitude"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/longitude"
-        android:layout_alignLeft="@+id/InfoText2"
-        android:layout_alignParentRight="true"
-        android:gravity="center_vertical|center_horizontal"
-        android:text="Latitude" />
-
-    <TextView
-        android:id="@+id/longitude"
+        android:id="@+id/accelerometer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/cameraButton"
-        android:layout_alignParentLeft="true"
+        android:layout_alignLeft="@+id/InfoText2"
         android:layout_alignParentRight="true"
         android:gravity="center_vertical|center_horizontal"
-        android:text="Longitude" />
+        android:text="XYZ" />
 
 </RelativeLayout>
