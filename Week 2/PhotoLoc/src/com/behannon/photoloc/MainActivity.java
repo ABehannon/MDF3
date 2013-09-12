@@ -4,12 +4,13 @@
 
 package com.behannon.photoloc;
 
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.BatteryManager;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -21,11 +22,9 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainActivity extends Activity implements SensorEventListener {
 
@@ -41,7 +40,6 @@ public class MainActivity extends Activity implements SensorEventListener {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		this.requestWindowFeature(Window.FEATURE_NO_TITLE); //Removes title from window
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
         
@@ -85,7 +83,6 @@ public class MainActivity extends Activity implements SensorEventListener {
 	//---------------------------
 	//Sensor information
 	//---------------------------
-	
 	@Override
 	public void onAccuracyChanged(Sensor sensor, int accuracy) {
 		
@@ -110,9 +107,11 @@ public class MainActivity extends Activity implements SensorEventListener {
 	//for power level
 	//---------------------------
 	private BroadcastReceiver batteryInfoReceiver = new BroadcastReceiver() {
+		
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			int level= intent.getIntExtra(BatteryManager.EXTRA_LEVEL,0);
+
 			batlife = String.valueOf(level);
 			System.out.println("BAT LIFE: " + batlife + "%");
 		}
@@ -153,8 +152,35 @@ public class MainActivity extends Activity implements SensorEventListener {
 			Bitmap bmp = (Bitmap) extras.get("data");
 			CameraResult.setImageBitmap(bmp);
 			
+			showNotification();
+			
 		}
 		
+	}
+	
+	//---------------------------
+	//Notification setup, called
+	//when picture is taken.
+	//---------------------------
+	private void showNotification() {
+
+		Intent intent = new Intent(this, Notification.class);
+		PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+		// Build notification
+		Notification noti = new Notification.Builder(this)
+		        .setContentTitle("Picture Taken!")
+		        .setContentText("PhotoLoc")
+		        .setSmallIcon(R.drawable.ic_launcher)
+		        .setContentIntent(pIntent).build();
+		    
+		NotificationManager notificationManager = 
+		  (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+		// Hide the notification after its selected
+		noti.flags |= Notification.FLAG_AUTO_CANCEL;
+
+		notificationManager.notify(0, noti); 
 	}
 
 }

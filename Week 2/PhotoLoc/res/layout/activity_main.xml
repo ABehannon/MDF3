@@ -6,34 +6,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity" >
-
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/ic_launcher" />
-
-    <Button
-        android:id="@+id/batteryButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:text="Check Battery Life" />
-
-    <Button
-        android:id="@+id/cameraButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/batteryButton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:text="Open Camera" />
+    tools:context=".MainActivity"
+    android:background="@drawable/bggradient" >
 
     <TextView
         android:id="@+id/InfoText1"
@@ -41,9 +15,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/logo"
-        android:text="Press button to take and display a picture."
-        android:gravity="center_vertical|center_horizontal" />
+        android:gravity="center_vertical|center_horizontal"
+        android:text="Press button to take and display a picture." />
 
     <TextView
         android:id="@+id/InfoText2"
@@ -81,5 +54,31 @@
         android:layout_alignParentRight="true"
         android:gravity="center_vertical|center_horizontal"
         android:text="XYZ" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true" >
+
+        <Button
+            android:id="@+id/batteryButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+        	android:layout_weight="1" 
+            android:text="Check Battery Life" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/cameraButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linearLayout1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:text="Open Camera" />
 
 </RelativeLayout>
