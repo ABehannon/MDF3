@@ -38,7 +38,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/imageView1"
         android:gravity="center_vertical|center_horizontal"
-        android:text="Favorite Quote" />
+        android:text="Saved Quote" />
 
     <TextView
         android:id="@+id/authorText2"

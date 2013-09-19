@@ -11,6 +11,16 @@
     tools:context=".MainActivity"
     android:gravity="center" >
 
+    <TextView
+        android:id="@+id/quoteText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/authorText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/pageInfoText"
+        android:gravity="center_vertical|center_horizontal" />
+
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
@@ -19,30 +29,42 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:adjustViewBounds="true"
-        android:src="@drawable/quoter"
-         />
+        android:src="@drawable/quoter" />
 
     <TextView
-        android:id="@+id/instructionsText"
+        android:id="@+id/pageInfoText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/imageView1"
         android:gravity="center_vertical|center_horizontal"
-        android:text="Please choose an option from the list below." />
+        android:text="Quote of the Moment" />
 
-    <ListView
-        android:id="@+id/fragmentList"
+    <TextView
+        android:id="@+id/authorText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linearLayout1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:gravity="center_vertical|center_horizontal" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/instructionsText"
-        android:layout_gravity="center"
-        android:entries="@array/options_array" >
+        android:gravity="center_vertical|center_horizontal" >
 
-    </ListView>
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Save Quote" />
+    </LinearLayout>
 
 </RelativeLayout>

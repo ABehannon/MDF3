@@ -12,4 +12,7 @@
         <item>View Saved Quote</item>
         <item>Visit API Website</item>
     </string-array>
+    <string name="action_favorite">View Saved</string>
+    <string name="action_website">View API Website</string>
+    <string name="action_mainmenu">Main Menu</string>
 </resources>

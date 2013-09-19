@@ -6,6 +6,7 @@ package com.behannon.quoter;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,10 +17,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.behannon.libs.FileSaving;
 import com.behannon.libs.QuoteProvider;
 import com.behannon.libs.Singleton;
 import com.behannon.libs.WebCheck;
@@ -42,46 +47,65 @@ public class MainActivity extends Activity {
 		// Tests connection upon being loaded.
 		testConnection();
 
-		final ListView fragmentList = (ListView) findViewById(R.id.fragmentList);
+		// Run the call to get initial quote online
+		getQuote();
 
-		fragmentList
-				.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+		// Button for saving info
+		Button saveButton = (Button) findViewById(R.id.saveButton);
+		saveButton.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				System.out.println("CLICKED!");
+				TextView authorText = (TextView) findViewById(R.id.authorText);
+				TextView quoteText = (TextView) findViewById(R.id.quoteText);
+				String authorData = authorText.getText().toString()
+						.replace("Author:", "");
+				String quoteData = quoteText.getText().toString();
+				String MixedData = authorData + ":" + quoteData;
 
-					@Override
-					public void onItemClick(AdapterView<?> arg0, View arg1,
-							int position, long arg3) {
-						System.out.println("POS: " + position);
+				System.out.println("Save Data: " + MixedData);
+				FileSaving.storeStringFile(getApplicationContext(),
+						"favoriteData", MixedData, false);
 
-						switch (position) {
+				Toast.makeText(getApplicationContext(),
+						"The requested quote has been saved.",
+						Toast.LENGTH_LONG).show();
 
-						// Quote of the Moment
-						case 0:
+			}
+		});
 
-							if (_connected) {
-								quoteButton();
-							} else {
-								Toast.makeText(
-										getApplicationContext(),
-										"You are not currently connected to the internet. Searching will not work, but you may still be able to load your last saved definition.",
-										Toast.LENGTH_LONG).show();
-							}
-							break;
+	}
 
-						// Last saved file & offline view
-						case 1:
-							favoriteButton();
-							break;
+	// Main menu addition
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.main, menu);
+		menu.getItem(2).setVisible(false);
+		return true;
+	}
 
-						// Website visit
-						case 2:
-							intentButton();
-							break;
-						}
+	// Main menu on select
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
 
-					}
+		boolean ret = false;
+		if (item.getItemId() == R.id.action_mainmenu) {
+			ret = true;
+		} else if (item.getItemId() == R.id.action_favorite) {
+			favoriteButton();
+			ret = true;
+		} else if (item.getItemId() == R.id.action_website) {
+			intentButton();
+			ret = true;
+		} else {
+			ret = super.onOptionsItemSelected(item);
+		}
+		return ret;
+	}
 
-				});
-
+	// Called when attempting to open the second activity
+	public void favoriteButton() {
+		Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+		startActivity(intent);
 	}
 
 	// Called when the website listview item is clicked
@@ -94,21 +118,11 @@ public class MainActivity extends Activity {
 
 	}
 
-	// Called when the favorite button from listview is clicked
-	public void favoriteButton() {
-
-		// Show third activity.
-		Intent intent = new Intent(MainActivity.this, ThirdActivity.class);
-		startActivity(intent);
-	}
-
 	// Called when the quote of the moment listview item is clicked
-	public void quoteButton() {
+	@SuppressLint("HandlerLeak")
+	public void getQuote() {
 
 		_connected = WebCheck.getConnectionStatus(_context);
-
-		// Tests connection upon being clicked
-		testConnection();
 
 		Handler serviceHandler = new Handler() {
 
@@ -134,12 +148,7 @@ public class MainActivity extends Activity {
 						Cursor cursor = getContentResolver().query(
 								QuoteProvider.QuoteData.CONTENT_URI, null,
 								null, null, null);
-
-						// Show second activity.
-						Intent intent = new Intent(MainActivity.this,
-								SecondActivity.class);
-
-						startActivity(intent);
+						displayQuoteData(cursor);
 
 					} catch (JSONException e) {
 
@@ -162,6 +171,33 @@ public class MainActivity extends Activity {
 
 	}
 
+	public void displayQuoteData(Cursor cursor) {
+
+		String read = FileSaving.readStringFile(this, "quoteData", false);
+
+		// Init variables
+		JSONObject json;
+
+		try {
+
+			// create json from the file loaded
+			json = new JSONObject(read);
+			String quote = json.get("quote").toString();
+			String author = json.get("author").toString();
+
+			// Set the text views to show data loaded
+			((TextView) findViewById(R.id.quoteText)).setText(quote);
+			((TextView) findViewById(R.id.authorText)).setText("Author: "
+					+ author);
+
+		} catch (JSONException e) {
+
+			testConnection();
+			e.printStackTrace();
+
+		}
+	}
+
 	// Called to test internet when button pressed or app started
 	public void testConnection() {
 
@@ -178,6 +214,21 @@ public class MainActivity extends Activity {
 					Toast.LENGTH_LONG).show();
 			System.out.println("OFFLINE");
 
+			String file = FileSaving.readStringFile(_context, "quoteData",
+					false);
+
+			if (!file.isEmpty()) {
+
+				Cursor cursor = getContentResolver().query(
+						QuoteProvider.QuoteData.CONTENT_URI, null, null, null,
+						null);
+				displayQuoteData(cursor);
+
+			} else {
+
+				System.out.println("EMPTY FILE ERROR");
+
+			}
 		}
 	}
 
