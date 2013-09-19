@@ -24,7 +24,15 @@ public class WidgetProvider extends AppWidgetProvider {
 
 		RemoteViews rv = new RemoteViews(context.getPackageName(),
 				R.layout.widget_layout);
+		
+		Intent intent = new Intent(Intent.ACTION_VIEW,
+				Uri.parse("http://quotesondesign.com/"));
+		PendingIntent pendingIntent = PendingIntent.getActivity(context, 0,
+				intent, 0);
 
+		rv.setOnClickPendingIntent(R.id.widgetQuoteText, pendingIntent);
+		rv.setOnClickPendingIntent(R.id.widgetAuthorText, pendingIntent);
+		
 		try {
 
 			String read = FileSaving
@@ -54,13 +62,6 @@ public class WidgetProvider extends AppWidgetProvider {
 		} finally {
 
 		}
-		Intent intent = new Intent(Intent.ACTION_VIEW,
-				Uri.parse("http://quotesondesign.com/"));
-		PendingIntent pendingIntent = PendingIntent.getActivity(context, 0,
-				intent, 0);
-
-		rv.setOnClickPendingIntent(R.id.widgetQuoteText, pendingIntent);
-		rv.setOnClickPendingIntent(R.id.widgetAuthorText, pendingIntent);
 		appWidgetManager.updateAppWidget(appWidgetIds, rv);
 	}
 
