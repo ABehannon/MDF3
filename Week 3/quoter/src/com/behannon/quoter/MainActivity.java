@@ -55,8 +55,8 @@ public class MainActivity extends Activity {
 		saveButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				System.out.println("CLICKED!");
-				TextView authorText = (TextView) findViewById(R.id.authorText);
-				TextView quoteText = (TextView) findViewById(R.id.quoteText);
+				TextView authorText = (TextView) findViewById(R.id.widgetAuthorText);
+				TextView quoteText = (TextView) findViewById(R.id.widgetQuoteText);
 				String authorData = authorText.getText().toString()
 						.replace("Author:", "");
 				String quoteData = quoteText.getText().toString();
@@ -186,8 +186,8 @@ public class MainActivity extends Activity {
 			String author = json.get("author").toString();
 
 			// Set the text views to show data loaded
-			((TextView) findViewById(R.id.quoteText)).setText(quote);
-			((TextView) findViewById(R.id.authorText)).setText("Author: "
+			((TextView) findViewById(R.id.widgetQuoteText)).setText(quote);
+			((TextView) findViewById(R.id.widgetAuthorText)).setText("Author: "
 					+ author);
 
 		} catch (JSONException e) {

@@ -4,26 +4,19 @@
 
 package com.behannon.quoter;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import com.behannon.libs.FileSaving;
-import com.behannon.libs.QuoteProvider;
 import com.behannon.libs.Singleton;
-import com.behannon.libs.WebCheck;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 @SuppressLint("HandlerLeak")
 public class SecondActivity extends Activity {
@@ -99,8 +92,8 @@ public class SecondActivity extends Activity {
 				String author = splitter[0];
 
 				// Set the text views to show data loaded
-				((TextView) findViewById(R.id.quoteText2)).setText(quote);
-				((TextView) findViewById(R.id.authorText2)).setText("Author:"
+				((TextView)findViewById(R.id.quoteText2)).setText(quote);
+				((TextView)findViewById(R.id.authorText2)).setText("Author:"
 						+ author);
 
 			} catch (Exception e) {

@@ -12,10 +12,10 @@
     android:gravity="center" >
 
     <TextView
-        android:id="@+id/quoteText"
+        android:id="@+id/widgetQuoteText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/authorText"
+        android:layout_above="@+id/widgetAuthorText"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/pageInfoText"
@@ -42,7 +42,7 @@
         android:text="Quote of the Moment" />
 
     <TextView
-        android:id="@+id/authorText"
+        android:id="@+id/widgetAuthorText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/linearLayout1"
