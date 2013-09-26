@@ -7,7 +7,7 @@
 -->
 
 <html>
-
+	
 	<head>
 
 		<title>Word Search</title>
@@ -34,7 +34,7 @@
 			<!-- Header -->
 			<div data-role="header" data-position="fixed">
 				<center>
-				Word Search
+					<img src="file:///android_asset/wordsearchresize.png" width="160px" height="40px">
 				</center>
 			</div>
 			
@@ -43,7 +43,21 @@
 				<div class="ui-grid-solo">
 					<div class="ui-bar ui-bar-a">
 						<center>
-						Test
+						Select a keyword below and press search.
+						<br>A dictionary result will then be shown.
+						</center>
+					</div>
+				</div>
+				
+				<br><br><br>
+				
+				<div class="ui-grid-solo">
+					<div class="ui-bar ui-bar-a">
+						<center>
+							<button type="button" position="fixed" id="cowButton" data-theme="b" onclick="cowButton.performClick();">Cow</a>
+							<button type="button" position="fixed" id="moneyButton" data-theme="b" onclick="moneyButton.performClick();">Money</a>
+							<button type="button" position="fixed" id="redButton" data-theme="b" onclick="redButton.performClick();">Red</a>
+							<button type="button" position="fixed" id="triangleButton" data-theme="b" onclick="triangleButton.performClick();">Triangle</a>
 						</center>
 					</div>
 				</div>
@@ -51,14 +65,18 @@
 			
 			<!-- Footer -->
 			<div data-role="footer" data-position="fixed">
-				<center>
-				<button type="button" position="fixed" id="searchButton" data-theme="b" onclick="searchButton.performClick();">Search</a>
-				</center>
+
 			</div>
 			
-		
 		</div>
 	
 	</body>
+	
+	<script type="text/javascript">
+    function doSomething() {
+        var keyword = document.myForm.searchWord.value;
+        var result = Android.doSomething(keyword);
+    }
+	</script>
 
 </html>
