@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bggradient"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp" >
+
+    <TextView
+        android:id="@+id/instructionText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/banner"
+        android:gravity="center"
+        android:text="@string/instructions1" />
+
+    <TextView
+        android:id="@+id/instructionText2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/instructionText"
+        android:gravity="center"
+        android:text="@string/instructions2" />
+
+    <EditText
+        android:id="@+id/searchBox"
+        style="@style/AppTheme"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/instructionText2"
+        android:ems="10"
+        android:gravity="center_vertical|center"
+        android:hint="@string/enter_word_here"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/saveButton"
+        style="@style/AppTheme"
+        android:layout_alignLeft="@+id/searchButton"
+        android:layout_alignTop="@+id/loadButton"
+        android:text="@string/save_definition"
+        android:textSize="17sp" />
+
+    <Button
+        android:id="@+id/loadButton"
+        style="@style/AppTheme"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/load_definition" />
+
+    <Button
+        android:id="@+id/searchButton"
+        android:layout_above="@+id/saveButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/search" />
+    
+    <ImageView
+        android:id="@+id/banner"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/instructionText2"
+        android:contentDescription="@string/bannerimage"
+        android:src="@drawable/wordsearch" />
+
+    <TextView
+        android:id="@+id/resultsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/searchButton"
+        android:layout_alignLeft="@+id/searchBox"
+        android:layout_alignRight="@+id/searchBox"
+        android:layout_below="@+id/searchBox"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="" />
+
+</RelativeLayout>

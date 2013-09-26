@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Word Search</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="search">Search</string>
+    <string name="load_definition">Load Definition</string>
+    <string name="save_definition">Save Definition</string>
+    <string name="enter_word_here">Enter Word Here</string>
+    <string name="instructions2">Too many requests will lock out the API key.</string>
+    <string name="instructions1">To retreive a definition, enter a word below.</string>
+    <string name="bannerimage">bannerImage</string>
+
+</resources>
